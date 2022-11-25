@@ -148,7 +148,7 @@ public class MainCtr implements Initializable{
     private void deletePerson(ActionEvent event){
         JFrame successDelete = new JFrame();
         PersonData selected = personDataTableView.getSelectionModel().getSelectedItem();
-        int option = JOptionPane.showOptionDialog(null, "Do you delete "+selected.nameProperty().getValue()+"'s contact?", "delete", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, event);
+        int option = JOptionPane.showOptionDialog(null, "Do you delete "+selected.nameProperty().getValue()+"'s contact?", "Delete confirming", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, null, null, event);
         
         if (option == JOptionPane.YES_OPTION) {
         personDataTableView.getItems().remove(selected);

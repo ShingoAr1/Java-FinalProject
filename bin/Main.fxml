@@ -42,25 +42,25 @@
 
 <VBox prefHeight="400.0" prefWidth="640.0" stylesheets="src\resource\stylesheet.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainCtr">
   <children>
-    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+    <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <children>
-        <Label id="#Label" alignment="CENTER" layoutX="5.0" layoutY="29.0" prefHeight="35.0" prefWidth="157.0" style="&#10;" stylesheets="@resource/stylesheet.css" text="Contact Book" textAlignment="CENTER" wrapText="false">
+        <Label id="#Label" alignment="CENTER" layoutX="25.0" layoutY="29.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" style="&#10;" text="Contact Book" textAlignment="CENTER" wrapText="false">
           <font>
             <Font name="SansSerif Bold" size="18.0" />
           </font>
         </Label>
-            <TableView fx:id="personDataTableView" layoutX="166.0">
+            <TableView fx:id="personDataTableView" layoutX="166.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="400.0" minWidth="478.0">
               <columns>
-                <TableColumn id="#nameColumn" fx:id="nameColumn" prefWidth="75.0" text="Name" />
-                <TableColumn id="#categoryColumn" fx:id="categoryColumn" prefWidth="75.0" text="Category" />
-                  <TableColumn id="#emailColumn" fx:id="emailColumn" minWidth="100.0" prefWidth="100.0" resizable="false" text="Email Address" />
-                  <TableColumn id="#phoneColumn" fx:id="phoneColumn" minWidth="100.0" prefWidth="100.0" resizable="false" text="Phone Number" />
-                  <TableColumn id="#noteColumn" fx:id="notesColumn" minWidth="120.0" prefWidth="120.0" text="Notes" />
+                <TableColumn id="#nameColumn" fx:id="nameColumn" maxWidth="1.7976931348623157E308" minWidth="80.0" prefWidth="-1.0" text="Name" />
+                <TableColumn id="#categoryColumn" fx:id="categoryColumn" maxWidth="1.7976931348623157E308" minWidth="75.0" prefWidth="-1.0" text="Category" />
+                  <TableColumn id="#emailColumn" fx:id="emailColumn" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="-1.0" resizable="false" text="Email Address" />
+                  <TableColumn id="#phoneColumn" fx:id="phoneColumn" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="-1.0" resizable="false" text="Phone Number" />
+                  <TableColumn id="#noteColumn" fx:id="notesColumn" maxWidth="1.7976931348623157E308" minWidth="120.0" prefWidth="-1.0" text="Notes" />
               </columns>
             </TableView>
-            <Button id="#detailBtn" fx:id="showDetailBtn" layoutX="23.0" layoutY="206.0" mnemonicParsing="false" onAction="#showDetail" prefHeight="25.0" prefWidth="121.0" stylesheets="@resource/stylesheet.css" text="Show Detail" />
-            <Button id="#addBtn" fx:id="newContactBtn" layoutX="23.0" layoutY="262.0" mnemonicParsing="false" onAction="#addPersonData" prefHeight="25.0" prefWidth="121.0" stylesheets="@resource/stylesheet.css" text="Add New Contact" />
-             <Button id="#deleteBtn" fx:id="deleteBtn" layoutX="23.0" layoutY="313.0" mnemonicParsing="false" onAction="#deletePerson" prefHeight="25.0" prefWidth="121.0" stylesheets="@resource/stylesheet.css" text="Delete contact" textFill="#db0a18" />
+            <Button id="#detailBtn" fx:id="showDetailBtn" layoutX="23.0" layoutY="207.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#showDetail" prefHeight="25.0" prefWidth="121.0" text="Show Detail" />
+            <Button id="#addBtn" fx:id="newContactBtn" layoutX="23.0" layoutY="262.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#addPersonData" prefHeight="25.0" prefWidth="121.0" text="Add New Contact" />
+             <Button id="#deleteBtn" fx:id="deleteBtn" layoutX="23.0" layoutY="313.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#deletePerson" prefHeight="25.0" prefWidth="121.0" text="Delete contact" textFill="#db0a18" />
       </children>
     </AnchorPane>
   </children>
