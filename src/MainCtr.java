@@ -1,8 +1,8 @@
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import javafx.collections.transformation.FilteredList;
-import javafx.collections.transformation.SortedList;
+import javax.swing.*;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -10,7 +10,6 @@ import javafx.geometry.Insets;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -31,13 +30,8 @@ public class MainCtr implements Initializable{
     TextField editPhone = new TextField();
     TextField editAddress = new TextField();
     TextArea editNotes = new TextArea();
-    
-    @FXML
-    private TextField searchField;
-    @FXML
-    private ChoiceBox<String> choiceOptions;
 
-    private String[] searchOption = {"Select Column","name","category","email","phone"};
+
 
     @FXML
     private TableView<PersonData> personDataTableView;
@@ -74,7 +68,7 @@ public class MainCtr implements Initializable{
         showDetailBtn.setDisable(true);
         deleteBtn.setDisable(true);
 
-        choiceOptions.getItems().addAll(searchOption);
+
 
         personDataTableView.setOnMouseClicked(e -> {
             PersonData selected = personDataTableView.getSelectionModel().getSelectedItem();
@@ -93,7 +87,7 @@ public class MainCtr implements Initializable{
             }
         });
 
-        searchContact();
+
     }
 
     //load data to Table
@@ -114,11 +108,18 @@ public class MainCtr implements Initializable{
     @FXML
     private void addPersonData(ActionEvent event){
         newContactModal();
+        JFrame successAdd = new JFrame();
 
         dialog.showAndWait().ifPresent(response ->{
             if (response.getButtonData().equals(ButtonData.OK_DONE)) {
                 mainmodel.addPerson(editName.getText(), editCategory.getText(),editEmail.getText(),editPhone.getText(),editAddress.getText(),editNotes.getText());
+                JOptionPane.showMessageDialog(successAdd, "Added new contact successfully");
+                successAdd.setSize(300,300);
+                successAdd.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 this.setDatatoTable();
+
+                
+                
             }
         });
 
@@ -127,13 +128,16 @@ public class MainCtr implements Initializable{
 
     @FXML
     private void showDetail(ActionEvent event){
-
+    JFrame successUpdate = new JFrame();
     
         detailModal();
 
         dialog.showAndWait().ifPresent(response -> {
             if(response.getButtonData().equals(ButtonData.OK_DONE)){
                 mainmodel.editPersonData(editName.getText(), editCategory.getText(), editEmail.getText(), editPhone.getText(),editNotes.getText(),editAddress.getText(),editIdString);
+                JOptionPane.showMessageDialog(successUpdate, "Updated contact successfully");
+                successUpdate.setSize(300,300);
+                successUpdate.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 this.setDatatoTable();
             }
         });
@@ -142,9 +146,20 @@ public class MainCtr implements Initializable{
     //delete person
     @FXML
     private void deletePerson(ActionEvent event){
+        JFrame successDelete = new JFrame();
         PersonData selected = personDataTableView.getSelectionModel().getSelectedItem();
+        int option = JOptionPane.showOptionDialog(null, "Do you delete "+selected.nameProperty().getValue()+"'s contact?", "delete", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, event);
+        
+        if (option == JOptionPane.YES_OPTION) {
         personDataTableView.getItems().remove(selected);
         mainmodel.delete(selected.idProperty().getValue());
+        JOptionPane.showMessageDialog(successDelete, "Deleted "+selected.nameProperty().getValue()+"'s contact");
+        successDelete.setSize(300,300);
+        successDelete.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        }
+       
+       
+
 
     }
 
@@ -223,61 +238,10 @@ public class MainCtr implements Initializable{
         dialog.getDialogPane().getButtonTypes().add(editBtn);
         dialog.getDialogPane().getButtonTypes().add(cancelBtn);
     }
+
    
-    private void searchContact() {
-FilteredList<PersonData> searchData = new FilteredList<>(PersonList.PERSONLIST, e -> true);
 
-        searchField.setOnKeyPressed(e -> {
-            personDataTableView.getSelectionModel().clearSelection();
-        });
 
-        searchField.setOnKeyReleased(e ->{
-          searchField.textProperty().addListener((Observable,oldValue,newValue) ->{
-            searchData.setPredicate(person ->{
-                if (newValue == null || newValue.isEmpty()) {
-                    return true;
-                }
-                String option = choiceOptions.getValue();
-                
-                switch (option) {
-                    case "name":
-                    if (person.nameProperty().getValue().contains(newValue)) {
-                      return true;  
-                    }
-                    break;
-
-                    case "category":
-                    if (person.categoryProperty().getValue().contains(newValue)) {
-                      return true;  
-                    }
-                    break;
-
-                    case "email":
-                    if (person.emailProperty().getValue().contains(newValue)) {
-                      return true;  
-                    }
-                    break;
-
-                    case "phone":
-                    if (person.phoneProperty().getValue().contains(newValue)) {
-                      return true;  
-                    }
-                    break;
-                
-                    default:
-
-                    break;
-                }
-                return false;
-                });
-            }
-            );
-
-            SortedList<PersonData> sortedData = new SortedList<>(searchData);
-            sortedData.comparatorProperty().bind(personDataTableView.comparatorProperty());
-            personDataTableView.setItems(sortedData);
-          });  
-        };
     }
 
 
